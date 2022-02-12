@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: echo-app
+  name: echo-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: echo-app
+  template:
+    metadata:
+      labels:
+        app: echo-app
+    spec:
+      volumes:
+      - name: app-cfg
+        secret:
+          secretName: app-cfg
+      containers:
+      - image: rnemet/echo:latest
+        name: echo
+        env:
+        - name: DB_HOST
+          value: postgres.postgres.svc
+        - name: APP_PORT
+          value: "9999"
+        ports:
+        - name: http
+          containerPort: 9999
+        volumeMounts:
+        - name: app-cfg
+          mountPath: "/app/configs"
+          readOnly: true

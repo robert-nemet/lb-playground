@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: echo-app
+  name: echo-app
+spec:
+  template:
+    spec:
+      volumes:
+        - name: app-db
+          secret:
+            secretName: app-db
+      initContainers:
+      - name: liquibase
+        image: liquibase/liquibase:4.7.0
+        volumeMounts:
+        - name: app-db
+          mountPath: /liquibase/changelog
+          readOnly: true
+        command:
+        - liquibase
+        - --defaults-file=/liquibase/changelog/liquibase.properties
+        - update
+        
+
