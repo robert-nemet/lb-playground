@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: postgres
+  name: postgres
+  namespace: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      volumes:
+      - name: pg-pv-storage
+        persistentVolumeClaim:
+          claimName: pg-pv-claim
+      containers:
+      - image: postgres:14.1
+        name: postgres
+        envFrom:
+        - secretRef:
+            name: pg-secrets
+        ports:
+          - name: dbport
+            containerPort: 5432
+        volumeMounts:
+        - mountPath: "/docker-entrypoint-initdb.d/"
+          name: pg-pv-storage
