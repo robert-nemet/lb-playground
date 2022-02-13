@@ -43,5 +43,5 @@ Setup liquibase job.
 2. Deploy app: `k -n app apply -k base/app`
 3. Try: `http POST localhost:9999/echo msg="hello ddd"` ==> 200
 4. Try: `http POST localhost:9999/counter` ==> `"msg": "pq: relation \"counters\" does not exist"`
-5. Apply overlay with job: 
+5. Apply overlay with job: `k -n app apply -k overlays/liquibase`
 6. Try 4.
