@@ -4,5 +4,4 @@ data:
   liquibase.properties: Y2xhc3NwYXRoOiAvbGlxdWliYXNlL2NoYW5nZWxvZwp1cmw6IGpkYmM6cG9zdGdyZXNxbDovL3Bvc3RncmVzLnBvc3RncmVzLnN2Yzo1NDMyL2RvY2tlcgpjaGFuZ2VMb2dGaWxlOiBjaGFuZ2Vsb2cueG1sCnVzZXJuYW1lOiByb290CnBhc3N3b3JkOiBwYXNzd29yZA==
 kind: Secret
 metadata:
-  creationTimestamp: null
   name: app-db

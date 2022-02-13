@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: liquibase
+spec:
+  template:
+    spec:
+      volumes:
+        - name: app-db
+          secret:
+            secretName: app-db
+      containers:
+      - name: liquibase
+        image: liquibase/liquibase:4.7.0
+        volumeMounts:
+        - name: app-db
+          mountPath: /liquibase/changelog
+          readOnly: true
+        command:
+        - liquibase
+        - --defaults-file=/liquibase/changelog/liquibase.properties
+        - update
+      restartPolicy: Never
