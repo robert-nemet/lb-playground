@@ -30,10 +30,11 @@ This requires app to be setup as well. Ingress for too.
 
 1. Deploy postgres : `k apply -k base/postgres`
 2. deploy app: `k -n app apply -k base/app`
-3. Try: `http POST localhost:9999/echo msg="hello ddd"` ==> 200
-4. Try: `http POST localhost:9999/counter` ==> `"msg": "pq: relation \"counters\" does not exist"`
-5. Apply overlay with init containers: `k -n app apply -k overlays/app`
-6. try 4
+3. configmap: `k -n app apply -k base/liquibase`
+4. Try: `http POST localhost:9999/echo msg="hello ddd"` ==> 200
+5. Try: `http POST localhost:9999/counter` ==> `"msg": "pq: relation \"counters\" does not exist"`
+6. Apply overlay with init containers: `k -n app apply -k overlays/app`
+7. try 4
 
 ## Scenario three: Liquibase job
 
@@ -43,5 +44,6 @@ Setup liquibase job.
 2. Deploy app: `k -n app apply -k base/app`
 3. Try: `http POST localhost:9999/echo msg="hello ddd"` ==> 200
 4. Try: `http POST localhost:9999/counter` ==> `"msg": "pq: relation \"counters\" does not exist"`
-5. Apply overlay with job: `k -n app apply -k overlays/liquibase`
-6. Try 4.
+5. configmap: `k -n app apply -k base/liquibase`
+6. Apply overlay with job: `k -n app apply -k overlays/liquibase`
+7. Try 4.
