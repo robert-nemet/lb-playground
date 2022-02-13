@@ -1,17 +1,15 @@
 # Liquibase playground
 
-Place where test and validate usage of the Liquibase.
+POC for k8s and liquibase.
 
 ## Cluster with k3d
 
-`k3d cluster create -p "9999:80@loadbalancer" playground --agents 2`
+`k3d cluster create -p "9999:80@loadbalancer" playground`
 
 ## Liquibase on K8s
 
 Requirements:
 * postgres DB
-
-Nice to have:
 * running application
 
 ## Scenario one: Manual run
